@@ -8,7 +8,8 @@ The DeepFish dataset is organized into `train`, `val`, and `test` folders, with 
 - **Validation**: 770 images
 - **Test**: 3872 images
 
-For the third script, we interpreted the dataset as having `empty` and `valid` subfolders per class, treating it as a binary classification task (empty vs. valid). This might reflect a different organization or a specific task focus.\n
+For the third script, we interpreted the dataset as having `empty` and `valid` subfolders per class, treating it as a binary classification task (empty vs. valid). This might reflect a different organization or a specific task focus.  
+
 **Note:**
 The DeepFish dataset originally contains over 40,000 images. However, due to limited computational resources, we trained our models on a reduced subset of the dataset.
 
