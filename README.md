@@ -27,7 +27,7 @@ The scripts assume the dataset is in `/kaggle/input/deepfish/DeepFish/Classifica
 
 ## Scripts Overview
 
-### Script 1: Simple ANN (`DF_BaseModel.py`)
+### Script 1: Simple ANN (`DF_BaseModel.ipynb`)
 
 **What it does**: This script builds a basic ANN to classify images into 9 habitat classes. Instead of using convolutional layers, it flattens the 128x128 RGB images into a 1D vector and passes them through dense layers. It’s a stripped-down approach to see how a non-convolutional model performs on image data.
 
@@ -47,7 +47,7 @@ The scripts assume the dataset is in `/kaggle/input/deepfish/DeepFish/Classifica
   - Plots training/validation accuracy and loss.
   - A NetworkX diagram showing a simplified ANN structure (1 input, 3 hidden1, 3 hidden2, 1 output) with symbolic weights.
 
-### Script 2: VGG16 Transfer Learning (`DF_VGG.py`)
+### Script 2: VGG16 Transfer Learning (`DF_VGG.ipynb`)
 
 **What it does**: This script uses VGG16, pre-trained on ImageNet, for transfer learning. We freeze VGG16’s convolutional layers and add custom dense layers to classify the 9 habitats. It’s a more sophisticated approach, leveraging pre-trained features for better performance.
 
@@ -67,7 +67,7 @@ The scripts assume the dataset is in `/kaggle/input/deepfish/DeepFish/Classifica
   - Separate plots for training/validation accuracy and loss.
   - A NetworkX diagram of a simplified VGG16-inspired structure (3 input, 5 conv, 3 dense1, 2 dense2, 1 output).
 
-### Script 3: SOM + SVM (`DF_SOM.py`)
+### Script 3: SOM + SVM (`DF_SOM.ipynb`)
 
 **What it does**: This script takes a different angle, using a Self-Organizing Map (SOM) for unsupervised feature extraction, followed by SVMs for binary classification (empty vs. valid). It assumes each habitat class has `empty` and `valid` subfolders, which might be a different dataset setup.
 
