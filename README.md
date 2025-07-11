@@ -1,14 +1,12 @@
 # ANN Case Study: Fish Habitat Classification with DeepFish Dataset
-This repo contains three Python scripts I wrote for our Artificial Neural Networks course case study, focusing on classifying fish habitats using the DeepFish dataset. The dataset has images of fish in different habitats, and we explored three approaches: a simple ANN, a VGG16-based model with transfer learning, and a SOM+SVM combo. Each script tackles the problem differently, and I’ve included visualizations to make sense of the models and their performance. 
+This repo contains two Python scripts I wrote for our Artificial Neural Networks course case study, focusing on classifying fish habitats using the DeepFish dataset. The dataset has images of fish in different habitats, and we explored two approaches: a simple ANN and a VGG16-based model with transfer learning. Each script addresses the problem differently, and I’ve included visualisations to help clarify the models and their performance. 
 ## Dataset
 
-The DeepFish dataset is organized into `train`, `val`, and `test` folders, with images across 9 habitat classes (e.g., `9894`, `9907`). Each folder contains subfolders for the classes, and images are in RGB format. The dataset has:
+The DeepFish dataset is organised into `train`, `val`, and `test` folders, with images across 9 habitat classes (e.g., `9894`, `9907`). Each folder contains subfolders for the classes, and images are in RGB format. The dataset has:
 
 - **Train**: 3124 images
 - **Validation**: 770 images
-- **Test**: 3872 images
-
-For the third script, we interpreted the dataset as having `empty` and `valid` subfolders per class, treating it as a binary classification task (empty vs. valid). This might reflect a different organization or a specific task focus.  
+- **Test**: 3872 images  
 
 **Note:**
 The DeepFish dataset originally contains over 40,000 images. However, due to limited computational resources, we trained our models on a reduced subset of the dataset.
@@ -17,11 +15,9 @@ The DeepFish dataset originally contains over 40,000 images. However, due to lim
 
 To run these scripts, you’ll need Python 3.x and the following libraries:
 
-- **TensorFlow**: For deep learning models (Scripts 1 and 2).
-- **MiniSom**: For the SOM in Script 3.
-- **OpenCV**: For image processing in Script 3.
+- **TensorFlow**: For deep learning models.
 - **NetworkX, Matplotlib**: For visualizations.
-- **NumPy, Pandas, Scikit-learn**: For data handling and SVMs.
+- **NumPy, Pandas, Scikit-learn**: For data handling.
 
 The scripts assume the dataset is in `/kaggle/input/deepfish/DeepFish/Classification/organized` (typical for Kaggle). Update the `base_dir` path if your dataset is elsewhere.
 
@@ -67,27 +63,13 @@ The scripts assume the dataset is in `/kaggle/input/deepfish/DeepFish/Classifica
   - Separate plots for training/validation accuracy and loss.
   - A NetworkX diagram of a simplified VGG16-inspired structure (3 input, 5 conv, 3 dense1, 2 dense2, 1 output).
 
-### Script 3: SOM + SVM (`DF_SOM.ipynb`)
-
-**What it does**: This script takes a different angle, using a Self-Organizing Map (SOM) for unsupervised feature extraction, followed by SVMs for binary classification (empty vs. valid). It assumes each habitat class has `empty` and `valid` subfolders, which might be a different dataset setup.
-
-**Key Features**:
-
-- **Data Prep**: Loads images in grayscale, resizes to 64x64, and flattens to 4096D vectors. Labels are 0 (empty) or 1 (valid).
-- **SOM**: A 20x20 SOM grid (400 neurons) trained for 2000 iterations on normalized features. Extracts:
-  - BMU Coordinates (2D): SOM grid position for each sample.
-  - Activation Responses (400D): SOM grid activation for each sample.
-- **SVM**: Trains three RBF-kernel SVMs on:
-  - BMU Coordinates (71.05% accuracy).
-  - Activation Responses (86.31% accuracy).
-  - Original Features (86.80% accuracy).
-- **Visualizations**:
-  - A hexagonal SOM grid showing sample clustering (empty vs. valid).
-  - A NetworkX diagram of the pipeline (Input → SOM → BMU/Activation, Input → Original, SVMs → Output).
-
 ## Lessons Learned
 
-- **Model Complexity**: Script 1’s simple ANN was easy to code but underperformed due to flattening images. Script 2’s VGG16 showed that leveraging pre-trained models is a huge win for image tasks. Script 3’s SOM+SVM was a creative middle ground, blending unsupervised and supervised learning.
-- **Data Handling**: Keras’ `ImageDataGenerator` (Scripts 1 and 2) was a lifesaver for image preprocessing, but Script 3’s manual loading with OpenCV gave me more control (and headaches).
-- **Visualizations**: Plotting accuracy/loss and drawing network diagrams helped me understand what was going on. The SOM grid in Script 3 was especially fun to interpret.
-- **Challenges**: I hit some snags, like the weird class label in Script 1 and the dataset structure confusion in Script 3. Debugging TensorFlow warnings and managing Kaggle’s environment took patience.
+- **Model Selection Matters**: Implementing a basic ANN in Script 1 highlighted the limitations of using simple architectures for image classification, particularly due to the loss of spatial information when flattening images. In contrast, leveraging the pre-trained VGG16 model in Script 2 significantly improved performance, emphasizing the advantages of transfer learning in computer vision tasks.
+
+- **Efficient Data Handling**: Keras’ `ImageDataGenerator` proved invaluable for preprocessing and augmenting image data, streamlining the pipeline and improving model generalization.
+
+- **Importance of Visualization**: Plotting training and validation accuracy/loss curves, along with visualizing the model architecture, provided valuable insights into the model’s learning behavior and helped diagnose issues effectively.
+
+- **Overcoming Challenges**: Navigating TensorFlow warnings, resolving unexpected label issues in Script 1, and adapting to the constraints of the Kaggle environment required careful debugging and persistence.
+
